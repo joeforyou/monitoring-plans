@@ -1,0 +1,4 @@
+---
+applications:
+- name: monplans
+  memory: 64M

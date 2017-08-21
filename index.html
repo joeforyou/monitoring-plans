@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html class="not-oldie js" lang="en" dir="ltr"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="true">
+  <link rel="shortcut icon" href="https://www.epa.gov/sites/all/themes/epa/favicon.ico" type="image/vnd.microsoft.icon">
+  <meta name="MobileOptimized" content="width">
+  <meta http-equiv="cleartype" content="on">
+  <meta http-equiv="ImageToolbar" content="false">
+  <meta name="viewport" content="width=device-width">
+  <meta name="version" content="20161218">
+<!--googleon: all-->
+  <meta name="DC.description" content="">
+  <meta name="DC.title" content="">
+  <title>Monitoring Plan Viewer - US EPA</title>
+<!--googleoff: snippet-->
+  <meta name="keywords" content="">
+  <link rel="shortlink" href="https://www.epa.gov/sites/all/libraries/template2/standalone.html">
+  <link rel="canonical" href="https://www.epa.gov/sites/all/libraries/template2/standalone.html">
+  <meta name="DC.creator" content="">
+  <meta name="DC.language" content="en">
+  <meta name="DC.Subject.epachannel" content="">
+  <meta name="DC.type" content="">
+  <meta name="DC.date.created" content="">
+  <meta name="DC.date.modified" content="">
+  <!--START OF MY SCRIPTS/STYLES  -->
+  <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+      integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+      crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+      integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+      crossorigin=""></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.15/datatables.min.css"/>
+
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.15/datatables.min.js"></script>
+  <!--jsPDF  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+  <!--END OF MY SCRIPTS/STYLES  -->
+  <!--googleoff: all-->
+  <link type="text/css" rel="stylesheet" href="https://www.epa.gov/sites/all/libraries/template2/s.css" media="all">
+  <!--[if lt IE 9]><link type="text/css" rel="stylesheet" href="https://www.epa.gov/sites/all/themes/epa/css/ie.css" media="all" /><![endif]-->
+  <link rel="alternate" type="application/atom+xml" title="EPA.gov All Press Releases" href="https://www.epa.gov/newsreleases/search/rss">
+  <link rel="alternate" type="application/atom+xml" title="EPA.gov Headquarters Press Releases" href="https://www.epa.gov/newsreleases/search/rss/field_press_office/headquarters">
+  <link rel="alternate" type="application/atom+xml" title="Greenversations, EPA&#39;s Blog" href="https://blog.epa.gov/blog/feed/">
+  <!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/html5.js"></script><![endif]-->
+<!-- <script type="text/javascript" async="" src="./Monitoring_Plan_Viewer_USEPA_files/analytics.js.download"></script><script src="./Monitoring_Plan_Viewer_USEPA_files/gateway.min.js.download" type="text/javascript" async="true" data-vendor="acs" data-role="gateway"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="//gateway.answerscloud.com/epa-gov/production/trigger/fs.utils.js?v=406dkw7" src="./Monitoring_Plan_Viewer_USEPA_files/fs.utils.js.download"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="//gateway.answerscloud.com/epa-gov/production/trigger/fs.trigger.js?v=406dkw7" src="./Monitoring_Plan_Viewer_USEPA_files/fs.trigger.js.download"></script></head> -->
+<!-- NOTE, figure out body classes! -->
+<body class="wide-template">
+
+  <div class="skip-links"><a href="https://www.epa.gov/sites/all/libraries/template2/standalone.html#main-content" class="skip-link element-invisible element-focusable">Jump to main content</a></div>
+  <header class="masthead clearfix" role="banner">
+    <img class="site-logo" src="./Monitoring_Plan_Viewer_USEPA_files/logo.png" alt="">
+    <hgroup class="site-name-and-slogan">
+      <h1 class="site-name"><a href="https://www.epa.gov/" title="Go to the home page" rel="home"><span>US EPA</span></a></h1>
+      <div class="site-slogan">United States Environmental Protection Agency</div>
+    </hgroup>
+    <form class="epa-search" method="get" action="https://search.epa.gov/epasearch/epasearch">
+      <label class="element-hidden" for="search-box">Search</label>
+      <input class="form-text" placeholder="Search EPA.gov" name="querytext" id="search-box" value="">
+      <button class="epa-search-button" id="search-button" type="submit" title="Search">Search</button>
+      <input type="hidden" name="areaname" value="">
+      <input type="hidden" name="areacontacts" value="">
+      <input type="hidden" name="areasearchurl" value="">
+      <input type="hidden" name="typeofsearch" value="epa">
+      <input type="hidden" name="result_template" value="2col.ftl">
+    </form>
+  </header><nav class="nav main-nav clearfix" role="navigation">
+    <div class="nav__inner">
+      <h2 class="element-invisible">Main menu</h2>
+      <ul class="menu" role="menu">
+        <li class="menu-item" id="menu-learn" role="presentation"><a href="https://www.epa.gov/environmental-topics" title="Learn about Environmental Topics that EPA covers." class="menu-link" role="menuitem">Environmental Topics</a></li>
+        <li class="menu-item" id="menu-lawsregs" role="presentation"><a href="https://www.epa.gov/laws-regulations" title="Laws written by Congress provide the authority for EPA to write regulations. Regulations explain the technical, operational, and legal details necessary to implement laws." class="menu-link" role="menuitem">Laws &amp; Regulations</a></li>
+        <li class="menu-item" id="menu-about" role="presentation"><a href="https://www.epa.gov/aboutepa" title="Learn more about: our mission and what we do, how we are organized, and our history." class="menu-link" role="menuitem">About EPA</a></li>
+      </ul>
+    </div>
+  </nav><div id="mobile-nav" class="mobile-nav"><div class="mobile-bar clearfix"><a class="menu-button" href="https://www.epa.gov/sites/all/libraries/template2/standalone.html#mobile-links">Menu</a></div><div id="mobile-links" class="mobile-links element-hidden" style="height: 958px;"><ul class="menu" role="menu">
+        <li class="menu-item" id="menu-learn" role="presentation"><a href="https://www.epa.gov/environmental-topics" title="Learn about Environmental Topics that EPA covers." class="menu-link" role="menuitem" tabindex="-1">Environmental Topics</a></li>
+        <li class="menu-item" id="menu-lawsregs" role="presentation"><a href="https://www.epa.gov/laws-regulations" title="Laws written by Congress provide the authority for EPA to write regulations. Regulations explain the technical, operational, and legal details necessary to implement laws." class="menu-link" role="menuitem" tabindex="-1">Laws &amp; Regulations</a></li>
+        <li class="menu-item" id="menu-about" role="presentation"><a href="https://www.epa.gov/aboutepa" title="Learn more about: our mission and what we do, how we are organized, and our history." class="menu-link" role="menuitem" tabindex="-1">About EPA</a></li>
+      </ul></div></div>
+  <section id="main-content" class="main-content clearfix" role="main" tabindex="-1">
+    <div class="region-preface clearfix">
+      <div id="block-pane-epa-web-area-connect" class="block block-pane contextual-links-region">
+        <ul class="menu utility-menu">
+          <li class="menu-item"><a href="https://www.epa.gov/sites/all/libraries/template2/%7BCONTACT%20URL%7D" class="menu-link contact-us">Contact Us</a></li>
+        <li id="share" class="menu-item"><button class="share-button">Share</button><ul><li class="share-facebook"><a class="share-link" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.epa.gov%2Fsites%2Fall%2Flibraries%2Ftemplate2%2Fstandalone.html&amp;t=%7BPAGE%20NAME%7D%20%7C%20%7BWEB%20AREA%20NAME%7D%20%7C%20US%20EPA" title="Share this page">Facebook</a></li><li class="share-twitter"><a class="share-link" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fwww.epa.gov%2Fsites%2Fall%2Flibraries%2Ftemplate2%2Fstandalone.html&amp;text=%7BPAGE%20NAME%7D%20%7C%20%7BWEB%20AREA%20NAME%7D%20%7C%20US%20EPA&amp;url=https%3A%2F%2Fwww.epa.gov%2Fsites%2Fall%2Flibraries%2Ftemplate2%2Fstandalone.html&amp;via=EPA&amp;count=none&amp;lang=en" title="Tweet this page">Twitter</a></li><li class="share-googleplus"><a class="share-link" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.epa.gov%2Fsites%2Fall%2Flibraries%2Ftemplate2%2Fstandalone.html" title="Plus 1 this page">Google+</a></li><li class="share-pinterest"><a class="share-link" href="http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.epa.gov%2Fsites%2Fall%2Flibraries%2Ftemplate2%2Fstandalone.html&amp;description=%7BPAGE%20NAME%7D%20%7C%20%7BWEB%20AREA%20NAME%7D%20%7C%20US%20EPAmedia=https%3A%2F%2Fwww.epa.gov%2Fsites%2Fall%2Fthemes%2Fepa%2Fimg%2Fepa-seal.png" title="Pin this page">Pinterest</a></li></ul></li></ul>
+      </div>
+    </div>
+    <div class="main-column clearfix">
+<!--googleon: all-->
+<div id="loadingMessage"></div>
+<div id='allContent' class='row cols-2'>
+    <div class='size-2of5 col'>
+        <h4>Select a facility</h4>
+        <table id="facilitiesTable" class="noborder hover" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>ORIS</th>
+                    <th>Facility name</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class='size-3of5 col' >
+        <div id="facilityHeader">
+            <div class='row cols-2'>
+                <div class='size-4of5 col'>
+                    <h2 id="facilityName"></h2>
+                </div>
+                <div class='size-1of5 col'>
+                    <p id="orisCode"></p>
+                </div>
+            </div>
+        </div>
+        <div id='tabs'>
+            <ul class='tabs' id='tabsnav'>
+                <li><a href="#location" class="menu-internal">Location</a></li>
+                <li><a href="#contacts" class="menu-internal">Contacts</a></li>
+                <li><a href="#units" class="menu-internal">Units</a></li>
+                <li><a href="#monitoringPlans" class="menu-internal">Monitoring Plans</a></li>
+            </ul>
+            <div id="location">
+                <div id="basicFacilityInfo"></div>
+                <div id='facilityMap'></div>
+            </div>
+            <div id="contacts"></div>
+            <div id="units">
+
+
+                <div class='row cols-2' id="unitPage">
+                    
+                    <div class='size-2of5 col'>
+                        <h4>Select a unit</h4>
+                        <div class="form-checkboxes" id="checkboxes-id">
+                            <div class="form-item form-type-checkbox"><input class="form-checkbox" id="operatingUnitsToggle" type="checkbox"/><label class="option" for="operatingUnitsToggle"> Show operating units only</label></div>
+                        </div>
+
+                        <table id="unitsTable" class="noborder hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Unit ID</th>
+                                    <th>Start date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style='overflow-y:scroll;' class='size-3of5 box multi col'>
+                        <div id='unitInfo'>
+                        </div>
+                        <div id='unitFuels'>
+                        </div>
+                        <div id='unitControls'>
+                        </div>
+                        <div id='unitPrograms'>
+                        </div>
+                        <table id="generatorsTable" class="hover row-border" cellspacing="0" width="100%">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="monitoringPlans" class="tab-content">
+                <h4>Select a monitoring plan</h4>
+                    <div class="form-checkboxes" id="checkboxes-id">
+                        <div class="form-item form-type-checkbox"><input class="form-checkbox" id="activePlansToggle" type="checkbox"/><label class="option" for="activePlansToggle"> Show active plans only</label></div>
+                    </div>
+                <table id="monitoringPlansTable" class="noborder hover" cellspacing="0" width="100%">
+                    <thead>
+                        <tr><th>Unit/stack name</th>
+                            <th>Status</th>
+                            <th>Begin Year, Quarter</th>
+                            <th>End Year, Quarter</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="modal">
+    <a href="#" class="closeModal">&#10006;</a>
+    <div class="modal-content">
+        <h2 id='monPlanHeader'>Monitoring Plan</h2>
+        <div class='row cols-4'>   
+            <div class='col'>
+            <ul>
+                <li><a href='#monitoringLocation'>Monitoring location</a></li>
+                <li><a href='#unitOperations'>Unit operations</a></li>
+                <li><a href='#monMethod'>Monitoring methods</a></li>
+            </ul>
+            </div>
+            <div class='col'>
+            <ul>
+                <li><a href='#monSys'>Monitoring system</a></li>
+                <li><a href='#spanRangeFormulas'>Span, range, and formulas</a></li>
+                <li><a href='#loadOpInfo'>Load or operating info</a></li>
+            </ul>
+            </div>
+            <div class='col'>
+            <ul>
+                <li><a href='#monitoringDefaults'>Monitoring defaults</a></li>
+                <li><a href='#qualifications'>Qualifications</a></li>
+                <li><a href='#comments'>Comments</a></li>
+            </ul>
+            </div>
+            <div class='col'>
+                <ul><li><a id='monPlanPDFLink' href='#'></a></li></ul>
+            </div>
+        </div>
+        <hr>
+        <div id='mainReport'>
+            <div id='monitoringLocation'>
+                <div>
+                    <h3>Reporting frequency</h3>
+                    <table id='reportingFrequencyTable' class="noborder stripe hover" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Monitoring plan location ID(s)</th>
+                            <th>Reporting frequency</th>
+                            <th>Begin quarter</th>
+                            <th>End quarter</th>
+                        </thead>
+                        <tbody>
+                        </tbody>       
+                    </table>
+                </div>
+                <hr>
+                <div>
+                    <h3>Monitoring location attributes</h3>
+                    <table id='monitoringLocationAttributesTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Duct ind.</th>
+                                <th>Ground elevation (ft)</th>
+                                <th>Stack height (ft)</th>
+                                <th>Cross area exit (ft<sup>2</sup>)</th>
+                                <th>Cross area flow</th>
+                                <th>Material</th>
+                                <th>Shape</th>
+                                <th>Begin date</th>
+                                <th>End date</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div>
+                    <h3>Stack/pipes and unit relationships</h3>
+                    <table id='stackPipesUnitRelationshipsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Associated unit</th>
+                            <th>Bypass stack ind.</th>
+                            <th>Activation date</th>
+                            <th>Retirement date</th>
+                            <th>Begin date</th>
+                            <th>End date</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div id='unitOperations'>
+                <div>
+                    <h3>Unit operations</h3>
+                    <table id='unitOperationsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Commercial op. date</th>
+                            <th>Op. date</th>
+                            <th>B/T type</th>
+                            <th>B/T begin date</th>
+                            <th>B/T end date</th>
+                            <th>Max HI (mmBtu)</th>
+                            <th>HI begin date</th>
+                            <th>HI end date</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div>
+                    <h3>Unit programs</h3>
+                    <table id='unitProgramsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Program</th>
+                            <th>Unit class</th>
+                            <th>Certification begin date</th>
+                            <th>Certification deadline</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div>
+                    <h3>Unit fuels</h3>
+                    <table id='unitFuelsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Fuel type</th>
+                            <th>Fuel indicator</th>
+                            <th>Demo. method for GCV</th>
+                            <th>Demo. method for daily sulfur</th>
+                            <th>Ozone season ind.</th>
+                            <th>Begin date</th>
+                            <th>End date</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div id='unitControlsDiv'>
+                    <h3>Unit controls</h3>
+                    <table id='unitControlsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Parameter</th>
+                            <th>Control equipment</th>
+                            <th>Original ind.</th>
+                            <th>Seasonal ind.</th>
+                            <th>Installation date</th>
+                            <th>Optimization date</th>
+                            <th>Retirement date</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div id='monMethod'>
+                <div id='monMethodsDiv'>
+                    <h3>Monitoring methods</h3>
+                    <table id='monitoringMethodsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Parameter</th>
+                            <th>Methodology</th>
+                            <th>Subsitute data approach</th>
+                            <th>Bypass approach</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div id='monSys'>
+                <div>
+                    <h3>Monitoring systems</h3>
+                    <div id='monSystemDiv'>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id='spanRangeFormulas'>
+                <div id='spanValuesdiv'>
+                    <h3>Span values</h3>
+                    <table id='spanValuesTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Comp. type</th>
+                            <th>Scale</th>
+                            <th>Method</th>
+                            <th>MPC/MPF</th>
+                            <th>MEC</th>
+                            <th>Span val.</th>
+                            <th>Full-scale range</th>
+                            <th>UOM</th>
+                            <th>Flow span val. (scfh)</th>
+                            <th>Scale transition pt.</th>
+                            <th>Default high-range val.</th>
+                            <th>Flow full scale range</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div id='sysFuelFlowDiv'>
+                    <h3>Monitoring system fuel flow</h3>
+                    <table id='systemFuelFlowTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>System ID</th>
+                            <th>Fuel</th>
+                            <th>Max fuel flow rate</th>
+                            <th>UOM</th>
+                            <th>Source</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div id='analyzerRangeDiv'>
+                    <h3>Analyzer Range Data</h3>
+                    <table id='analyzerRangesTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Component Type</th>
+                            <th>Component ID</th>
+                            <th>Range Code</th>
+                            <th>Dual Range ind.</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div id='emissionsFormulasDiv'>
+                    <h3>Emissions Formulas</h3>
+                    <table id='emissionsFormulasTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Parameter</th>
+                            <th>Formula ID</th>
+                            <th>Formula Code</th>
+                            <th>Formula</th>
+                            <th>Begin Time</th>
+                            <th>End Time</th>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                <hr>                   
+            <div id='loadOpInfo'>
+
+                <div id='rectDuctDiv'>
+                    <h3>Rectangular duct wall adjustment factor</h3>
+                    <table id='rectangularDuctTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>WAF determined date</th>
+                            <th>WAF effective date/time</th>
+                            <th>WAF method code</th>
+                            <th>WAF value</th>
+                            <th>No. of test runs</th>
+                            <th>No. of traverse pts. WAF</th>
+                            <th>No. of test ports</th>
+                            <th>No. of traverse pts. Ref</th>
+                            <th>Duct width</th>
+                            <th>Duct depth</th>
+                            <th>WAF end date/time</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div id='loadOperatingInfoDiv'>
+                    <h3>Unit/stack pipe load or operating level information</h3>
+                    <table id='loadOperatingInfoTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Max hourly load</th>
+                            <th>UOM</th>
+                            <th>Upper bound of range of op.</th>
+                            <th>Lower bound of range of op.</th>
+                            <th>Normal op. level</th>
+                            <th>Second op. level</th>
+                            <th>Second normal ind.</th>
+                            <th>Load analysis date</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div id='monitoringDefaults'>
+
+                <div id='monDefaultsDiv'>
+                    <h3>Monitoring defaults</h3>
+                    <table id='monitoringDefaultsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                        <thead>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>UOM</th>
+                            <th>Purpose</th>
+                            <th>Fuel type</th>
+                            <th>Op. condition</th>
+                            <th>Source of value</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div id='qualifications'>
+                <h3>Qualification percent</h3>
+                <table id='qualificationsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                    <thead>
+                        <th>Qual. type</th>
+                        <th>Begin date</th>
+                        <th>End date</th>
+                        <th>Qual. year</th>
+                        <th>Average %</th>
+                        <th>Year 1</th>
+                        <th>Year 1 data type</th>
+                        <th>Year 1 %</th>
+                        <th>Year 2</th>
+                        <th>Year 2 data type</th>
+                        <th>Year 2 %</th>
+                        <th>Year 3</th>
+                        <th>Year 3 data type</th>
+                        <th>Year 3 %</th>
+                    </thead>
+                    <tbody >
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div id='comments'>
+                <h3>Comments</h3>
+                <table id='commentsTable' class="stripe hover noborder" cellspacing="0" width="100%">
+                    <thead>
+                        <th>Unit/stack pipe ID</th>
+                        <th>Comments</th>
+                        <th>Begin date</th>
+                        <th>End date</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+        </div>
+</div>
+<!--googleoff: all-->
+    </div>
+  </section>
+  
+  <footer class="main-footer clearfix" role="contentinfo">
+    <div class="main-footer__inner">
+      <div class="region-footer">
+        <div class="block block-pane block-pane-epa-global-footer">
+          <div class="row cols-3">
+            <div class="col size-1of3">
+              <div class="col__title">Discover.</div>
+              <ul class="menu">
+                <li><a href="https://www.epa.gov/accessibility">Accessibility</a></li>
+                <li><a href="https://www.epa.gov/aboutepa/administrator-gina-mccarthy">EPA Administrator</a></li>
+                <li><a href="https://www.epa.gov/planandbudget">Budget &amp; Performance</a></li>
+                <li><a href="https://www.epa.gov/contracts">Contracting</a></li>
+                <li><a href="https://www.epa.gov/home/grants-and-other-funding-opportunities">Grants</a></li>
+                <li><a href="https://www.epa.gov/ocr/whistleblower-protections-epa-and-how-they-relate-non-disclosure-agreements-signed-epa-employees">No FEAR Act Data</a></li>
+                <li><a href="https://www.epa.gov/home/privacy-and-security-notice">Privacy and Security</a></li>
+              </ul>
+            </div>
+            <div class="col size-1of3">
+              <div class="col__title">Connect.</div>
+              <ul class="menu">
+                <li><a href="https://www.data.gov/">Data.gov</a></li>
+                <li><a href="https://www.epa.gov/office-inspector-general/about-epas-office-inspector-general">Inspector General</a></li>
+                <li><a href="https://www.epa.gov/careers">Jobs</a></li>
+                <li><a href="https://www.epa.gov/newsroom">Newsroom</a></li>
+                <li><a href="https://www.whitehouse.gov/open">Open Government</a></li>
+                <li><a href="http://www.regulations.gov/">Regulations.gov</a></li>
+                <li><a href="https://www.epa.gov/newsroom/email-subscriptions">Subscribe</a></li>
+                <li><a href="https://www.usa.gov/">USA.gov</a></li>
+                <li><a href="https://www.whitehouse.gov/">White House</a></li>
+              </ul>
+            </div>
+            <div class="col size-1of3">
+              <div class="col__title">Ask.</div>
+              <ul class="menu">
+                <li><a href="https://www.epa.gov/home/forms/contact-us">Contact Us</a></li>
+                <li><a href="https://www.epa.gov/home/epa-hotlines">Hotlines</a></li>
+                <li><a href="https://www.epa.gov/foia">FOIA Requests</a></li>
+                <li><a href="https://www.epa.gov/home/frequent-questions-specific-epa-programstopics">Frequent Questions</a></li>
+              </ul>
+              <div class="col__title">Follow.</div>
+              <ul class="social-menu">
+                <li><a class="menu-link social-facebook" href="https://www.facebook.com/EPA">Facebook</a></li>
+                <li><a class="menu-link social-twitter" href="https://twitter.com/epa">Twitter</a></li>
+                <li><a class="menu-link social-youtube" href="https://www.youtube.com/user/USEPAgov">YouTube</a></li>
+                <li><a class="menu-link social-flickr" href="https://www.flickr.com/photos/usepagov">Flickr</a></li>
+                <li><a class="menu-link social-instagram" href="https://instagram.com/epagov">Instagram</a></li>
+              </ul>
+              <p class="last-updated">{LAST UPDATED DATE}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
+  <!-- REMOVE if not using -->
+  <script src="script.js"></script>
+
+
+</body></html>
